@@ -2,6 +2,7 @@ package com.samsung.libraryandroid.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.samsung.libraryandroid.MainActivity;
 import com.samsung.libraryandroid.R;
 import com.samsung.libraryandroid.domain.Book;
+import com.samsung.libraryandroid.fragment.ChangeBookFragment;
 
 import java.util.List;
 
@@ -67,6 +71,21 @@ public class BookAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         ((MyViewHolder) holder).tvAuthor.setText(book.getAuthor().getName());
         ((MyViewHolder) holder).tvGenre.setText(book.getGenre().getName());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ChangeBookFragment changeClientFragment = new ChangeBookFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(MainActivity.MSG_NAME, bookList.get(position));
+                changeClientFragment.setArguments(bundle);
+
+                ((AppCompatActivity) context).getSupportFragmentManager()
+                        .beginTransaction()
+                        .add(R.id.fl_main, changeClientFragment)
+                        .commit();
+            }
+        });
     }
 
     @Override

@@ -1,8 +1,9 @@
 package com.samsung.libraryandroid.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Book {
+public class Book implements Serializable {
 
     private int id;
 

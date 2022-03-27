@@ -25,4 +25,20 @@ public class AuthorMapper {
         return author;
     }
 
+    public Author authorFromJsonArray(JSONObject jsonObject) {
+
+        Author author = null;
+        try {
+
+            author = new Author(
+                    jsonObject.getInt("id"),
+                    jsonObject.getString("name")
+            );
+        } catch (JSONException e) {
+
+            e.printStackTrace();
+        }
+        return author;
+    }
+
 }
